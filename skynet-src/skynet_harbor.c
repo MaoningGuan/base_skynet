@@ -9,7 +9,7 @@
 static struct skynet_context * REMOTE = 0;
 static unsigned int HARBOR = 0;
 
-void 
+void
 skynet_harbor_send(struct remote_message *rmsg, uint32_t source, int session) {
 	int type = rmsg->sz >> HANDLE_REMOTE_SHIFT;
 	rmsg->sz &= HANDLE_MASK;
@@ -17,7 +17,7 @@ skynet_harbor_send(struct remote_message *rmsg, uint32_t source, int session) {
 	skynet_context_send(REMOTE, rmsg, sizeof(*rmsg) , source, type , session);
 }
 
-void 
+void
 skynet_harbor_register(struct remote_name *rname) {
 	int i;
 	int number = 1;
@@ -32,7 +32,7 @@ skynet_harbor_register(struct remote_name *rname) {
 	skynet_context_send(REMOTE, rname, sizeof(*rname), 0, PTYPE_SYSTEM , 0);
 }
 
-int 
+int
 skynet_harbor_message_isremote(uint32_t handle) {
 	int h = (handle & ~HANDLE_MASK);
 	return h != HARBOR && h !=0;
